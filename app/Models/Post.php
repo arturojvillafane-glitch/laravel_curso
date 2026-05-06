@@ -16,4 +16,11 @@ class Post extends Model
     'posted', 
     'image'];
 
+    public function category(){
+        return $this->belongsTo(Category::class);
+ }
+
+    public function posts(){
+        return $this->hasMany(Post::class);
+    }
 }

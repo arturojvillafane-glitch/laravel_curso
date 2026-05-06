@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Dashboard;
 
 use App\Http\Controllers\Controller;
 use App\Models\Post;
+use App\Models\Category;
 use Illuminate\Http\Request;
 
 class PostController extends Controller
@@ -11,7 +12,7 @@ class PostController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    /*public function index()
     {
         return Post::create(
             ['title' => "test",
@@ -25,6 +26,42 @@ class PostController extends Controller
         );
 
     }
+*/
+
+public function index()
+{
+        $post = Post::find(3);
+        //dd($post);
+       /* return $post->update(
+            [
+                'title' => "test new",
+                'slug' => "test",
+                'content' => "test",
+                'category_id' => 1,
+                'description' => "test ho,la",
+                'posted' => "not",
+                'image' => "test",
+                'item' => "item 1"
+            ]
+        );*/
+        //$post = Post::get();
+        //$post = Post::all()->toSql()
+         //return Post::where("category_id", '3')->toSql();
+        //dd($post);
+
+        //$post = Post::find(4);
+        //dd($post->Category);
+
+        $categorias = Category::find(1);
+        //dd($categorias);
+        foreach ($categorias->posts as $post) {
+            echo $post->title;
+        }
+        //dd($categoria->posts);
+
+
+   //return $post->delete();
+}
 
     /**
      * Show the form for creating a new resource.
