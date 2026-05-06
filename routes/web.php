@@ -1,12 +1,11 @@
 <?php
 use App\Http\Controllers\Test\TuControlador;
-use App\Http\Controllers\PostController;
+use App\Http\Controllers\Dashboard\PostController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('welcome');
 });
-
 
 Route::get("/contacto", function(){
     return view("contacto");
@@ -38,6 +37,6 @@ Route::get("/detalle", function  (){
 
 Route::get('/test/{id}', [TuControlador::class, 'index']);
 
-Route::resource('post', PostController::class);
+Route::resource("post", PostController::class);
 
 
