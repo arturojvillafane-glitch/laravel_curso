@@ -1,0 +1,4 @@
+.button, input, select,optgroup, textarea {
+    background-color: blanchedalmond;
+    border-radius: 20px;
+}
