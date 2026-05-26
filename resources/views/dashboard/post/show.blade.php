@@ -1,4 +1,4 @@
-@extends('dashboard.layout')
+@extends('Dashboard.layout')
 @section('content')
      <h1>{{ $post->title }}</h1>
      <span>{{ $post->posted }}</span>

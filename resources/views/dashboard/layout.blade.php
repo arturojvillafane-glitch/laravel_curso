@@ -11,6 +11,16 @@
     @if (session('status'))
         {{ session('status') }}
     @endif
+    
+    <br>
+    @if (session('status2'))
+    <br>
+        {{ session('status2') }}
+    @endif
+    <br>
+    @session('key-xx')
+        {{ $value }}
+    @endsession
     @yield('content')
 </body>
 </html>

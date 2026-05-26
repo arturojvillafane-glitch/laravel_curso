@@ -1,3 +1,6 @@
+@extends('dashboard.layout')
+@section('content')
+<br><br>
 <a href="{{ route("post.create") }}">Create</a>
 <table>
  <thead>
@@ -17,7 +20,7 @@
         <td>{{ $p->slug }}</td>
         <td>{{ $p->posted }}</td>
         <td>{{ $p->category->title }}</td>
-        <td style="padding: 0px 0px 0px 20px;">
+        <td style="padding: 5px 5px 5px 30px;">
             <a href="{{ route('post.edit', $p) }}">Edit</a>
             <a href="{{ route('post.show', $p) }}">Show</a>
         <form action="{{ route('post.destroy', $p) }}" method="post">
@@ -32,3 +35,4 @@
 </table>
 
 {{ $posts->links() }}
+@endsection

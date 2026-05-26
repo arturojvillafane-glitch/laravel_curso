@@ -113,8 +113,9 @@ public function index()
 
         //dd($request->all());
         */
+        session(['key-xx' => 'ENV-55']);
         Post::create($request->validated());
-        return to_route("post.index"); 
+        return to_route("post.index")->with('status', 'Post CREADO CORRECTAMENTE'); 
     }
 
     /**
@@ -146,7 +147,7 @@ public function index()
         $request->image->move(public_path("image"), $data["image"] );
     
         $post->update($data);
-        return to_route("post.index");
+        return to_route("post.index")->with('status', 'Post updated');
 
     }
     }
@@ -157,7 +158,9 @@ public function index()
     public function destroy(Post $post)
     {
     $post->delete();
-   return to_route('post.index');
+    session()->forget('key-xx');
+   return to_route('post.index')->with('status', 'Se elimino el  post');
     }
+    
 }
 
