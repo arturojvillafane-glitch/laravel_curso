@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Blog\BlogController;
+use App\Http\Controllers\CourseController;
 use App\Http\Controllers\Test\TuControlador;
 use App\Http\Controllers\Dashboard\PostController;
 use Illuminate\Support\Facades\Route;
@@ -197,3 +198,5 @@ Route::get('/muchos', function () {
     $post->tags()->sync([1,2,3]);
 
 });
+
+Route::get('/curso',[CourseController::class, 'index']);
