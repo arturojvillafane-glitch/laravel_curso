@@ -1,4 +1,6 @@
 <?php
+
+use App\Http\Controllers\Blog\BlogController;
 use App\Http\Controllers\Test\TuControlador;
 use App\Http\Controllers\Dashboard\PostController;
 use Illuminate\Support\Facades\Route;
@@ -7,10 +9,37 @@ use App\Models\Profile;
 use App\Models\Category;
 use App\Models\User;
 use App\Http\Controllers\User\ProfileController;
+use App\Models\Product;
 use App\Models\Tag;
 
-Route::get('/', function () {
+/*
+Route::get('/poli', function () {
+    
+    $user = User::find(1);
+    //$user->image()->create(['url' => 'avatars/user1.jpg']);
+
+    $product = Product::find(1);
+    //$product->image()->create(['url' => "avatars/producto1.jpg"]);
+    
+    $imageUrl = $user->image->url;
+    //dd($imageUrl);
+
+    $imageUrl_Pro = $product->image->url;
+    dd($imageUrl_Pro);
+
+});*/
+
+
+Route::get('/', function (){
     return view('welcome');
+});
+
+
+Route::group(['prefix' => 'blog'], function () {
+    Route::controller(BlogController::class)->group(function () {
+       Route::get('', [BlogController::class, 'index'])->name('blog.index');
+       Route::get('detail/{post}', [BlogController::class, 'show'])->name('blog.show');
+    });
 });
 
 Route::get("/contacto", function(){

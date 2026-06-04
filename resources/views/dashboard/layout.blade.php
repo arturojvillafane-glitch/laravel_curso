@@ -22,5 +22,8 @@
         {{ $value }}
     @endsession
     @yield('content')
+    <br><br>
+
+<a href="/dashboard">Dashboard</a>
 </body>
 </html>
