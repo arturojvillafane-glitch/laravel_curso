@@ -24,6 +24,8 @@
 <label for="">Descripción</label>
 <textarea name="description">{{ old("description",$post->description) }}</textarea>
 <br><br>
+<input type="hidden" name="user_id" value="{{ auth()->id() }}">
+
 @if (isset($task) && $task == 'edit')
     <label for="">Image</label>
     <input type="file" name="image">

@@ -9,6 +9,7 @@ use App\Models\Category;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use App\Http\Requests\Post\PutRequest;
+use Illuminate\Support\Facades\Gate;
 
 class PostController extends Controller
 {
@@ -131,8 +132,15 @@ public function index()
      */
     public function edit(Post $post)
     {
+        if (!Gate::allows('update-post', $post)) {
+            return abort(403);
+        }
+
         $categories = Category::pluck('id', 'title');
         return view('dashboard.post.edit', compact('categories', 'post'));
+
+         
+ 
 
     }
 
@@ -157,9 +165,12 @@ public function index()
      */
     public function destroy(Post $post)
     {
-    $post->delete();
-    session()->forget('key-xx');
-   return to_route('post.index')->with('status', 'Se elimino el  post');
+        if (!Gate::allows('delete', $post)) {
+            return abort(403);
+        }
+        $post->delete();
+        session()->forget('key-xx');
+    return to_route('post.index')->with('status', 'Se elimino el  post');
     }
     
 }

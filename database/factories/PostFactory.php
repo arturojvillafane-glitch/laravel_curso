@@ -18,7 +18,8 @@ class PostFactory extends Factory
             'description' => $this->faker->sentence(),
             'category_id' => $this->faker->randomElement([1, 2, 3]),
             'posted' => $this->faker->randomElement(['yes', 'not']),
-            'image' => $this->faker->imageUrl()
+            'image' => $this->faker->imageUrl(),
+            'user_id' => $this->faker->randomElement([1, 2, 3, 4, 5, 6, 7, 8, 9, 10])
         ];
     }
 }

@@ -16,7 +16,9 @@ class Post extends Model
     'category_id', 
     'description', 
     'posted', 
-    'image'];
+    'image',
+    'item',
+    'user_id'];
 
     public function category(){
         return $this->belongsTo(Category::class);
