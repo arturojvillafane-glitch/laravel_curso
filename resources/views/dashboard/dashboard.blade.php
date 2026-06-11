@@ -18,6 +18,14 @@
     <a href="{{ route('category.index') }}">Ver Categoria</a>
     <br>
     <a href="/">INICIO</a>
+    <br>
+    <hr>
+    <a href="{{ route('role.index') }}">Ver Roles</a>
+    <br>
+    <a href="{{ route('permission.index') }}">Ver Permisos</a>
+    <br>
+    <a href="{{ route('user.index') }}">Ver Usuarios</a>
+
 </form>
 </body>
 </html>

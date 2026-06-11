@@ -38,7 +38,11 @@ class RoleSeeder extends Seeder
     Permission::find(2)->assignRole(Role::find(2));
     Permission::find(3)->assignRole(Role::find(3));
     */
-    
-    User::find(11)->givePermissionTo(Permission::find(1));
+    //User::find(11)->givePermissionTo(Permission::find(1));
+    Permission::find(4)->assignRole(Role::find(1));
+    Permission::find(5)->assignRole(Role::find(1));
+    Permission::find(6)->assignRole(Role::find(1));
+    Permission::find(7)->assignRole(Role::find(1));
+    Permission::find(8)->assignRole(Role::find(1));
     }
 }
