@@ -10,30 +10,18 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use App\Http\Requests\Post\PutRequest;
 use Illuminate\Support\Facades\Gate;
+use Illuminate\Support\Facades\Auth;
 
 class PostController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    /*public function index()
-    {
-        return Post::create(
-            ['title' => "test",
-             'slug' => "test",
-             'content' => "test",
-             'item' => "item 1",
-             'category_id' => 1,
-             'description' => "test",
-             'posted' => "not",
-             'image' => "test"]
-        );
+    
 
-    }
-*/
 
 public function index()
 {
+    if (!Auth::user()->hasPermissionTo('editor.post.index')) {
+            abort(403, 'No tienes permiso para ver los posts');
+        }
         $post = Post::find(3);
         //dd($post);
        /* return $post->update(
@@ -79,6 +67,9 @@ public function index()
      */
     public function create()
     {
+     if (!Auth::user()->hasPermissionTo('editor.post.index')) {
+            abort(403, 'No tienes permiso para ver los posts');
+        }
     $categories = Category::pluck('id', 'title');
     $post = new Post();
     return view('dashboard.post.create', compact('categories', 'post'));
@@ -124,6 +115,9 @@ public function index()
      */
     public function show(Post $post)
     {
+         if (!Auth::user()->hasPermissionTo('editor.post.index')) {
+            abort(403, 'No tienes permiso para ver los posts');
+        }
         return view("dashboard.post.show",compact('post'));
     }
 
@@ -132,8 +126,9 @@ public function index()
      */
     public function edit(Post $post)
     {
-        if (!Gate::allows('update-post', $post)) {
-            return abort(403);
+        // Verificar si el usuario tiene permiso para crear posts
+        if (!Auth::user()->hasPermissionTo('editor.post.create')) {
+            abort(403, 'No tienes permiso para crear posts');
         }
 
         $categories = Category::pluck('id', 'title');
@@ -149,6 +144,13 @@ public function index()
      */
     public function update(PutRequest $request, Post $post)
     {
+       /* if (!Gate::allows('update-post', $post)) {
+            return abort(403);
+        }
+        */
+        if (!Auth::user()->hasPermissionTo('editor.post.index')) {
+            abort(403, 'No tienes permiso para ver los posts');
+        }
         $data = $request->validated();
         if( isset($data["image"])){
         $data["image"] = time().".".$data["image"]->extension();
@@ -165,10 +167,15 @@ public function index()
      */
     public function destroy(Post $post)
     {
-        if (!Gate::allows('delete', $post)) {
+        /*if (!Gate::allows('delete', $post)) {
             return abort(403);
         }
         $post->delete();
+        */
+        // Verificar si el usuario tiene permiso para eliminar posts
+        if (!Auth::user()->hasPermissionTo('editor.post.destroy')) {
+            abort(403, 'No tienes permiso para eliminar posts');
+        }
         session()->forget('key-xx');
     return to_route('post.index')->with('status', 'Se elimino el  post');
     }
